@@ -4,7 +4,7 @@ import { productService } from '../services/productService.js'
 const productResolver = {
     Query:{
         products: async () => {
-            return await productService.getAllProducts()
+            return await productService.getAllProduct()
         },
         searchProuctbyString: async (_, {contain}) => {
             return await productService.searchProuctbyString(contain)

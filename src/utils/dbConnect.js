@@ -1,14 +1,9 @@
 import mongoose from "mongoose"
-const mongooseUrl = "mongodb+srv://henorch01:fGwz0p9jJJbN5hUx@damart.3escttb.mongodb.net/?retryWrites=true&w=majority&appName=Damart"
 
 
-
-const DatabaseConnection = async () => {
+const DatabaseConnection = async (url) => {
     try {
-        await mongoose.connect(mongooseUrl, {
-            useNewUrlParser: true,
-            useUnifiedTopology:true
-        }).then(() => {
+        await mongoose.connect(url).then(() => {
             console.log('Database successfully connected');
         })
     } catch (error) {
@@ -17,4 +12,5 @@ const DatabaseConnection = async () => {
 }
 
 
-module.exports = DatabaseConnection
+
+export default DatabaseConnection

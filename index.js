@@ -6,8 +6,13 @@ import typeDefs from "./src/typeDefs/index.js"
 import productResolver from "./src/resolvers/productsResolver.js"
 import orderResolver from "./src/resolvers/orderResolver.js"
 import Userresolver from "./src/resolvers/userresolver.js"
+import DatabaseConnection from "./src/utils/dbConnect.js"
+import { config } from "./src/utils/config.js"
 
+//dot env 
 
+//The database connection file is done right here 
+DatabaseConnection(config.mongoUrl)
 const server = new ApolloServer({
      typeDefs, 
     resolvers: [productResolver, orderResolver, Userresolver]
@@ -15,7 +20,7 @@ const server = new ApolloServer({
 
 
 const { url } = await startStandaloneServer(server, {
-    listen:{port: 4003}
+    listen:{port: config.port}
 })
 
 

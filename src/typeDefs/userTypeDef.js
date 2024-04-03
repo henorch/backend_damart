@@ -24,6 +24,7 @@ input logInUSer {
 }
 
 type Query {
+    getAllUser: [User]!
     getUserByEmailAndPassword( input: logInUSer ): User!
 
 }

@@ -1,26 +1,33 @@
-import User from "../models/userSchema.js";
+import { userService } from "../services/usersService.js";
 
 const Userresolver = {
     Query: {
+        getAllUser: async () =>  {
+            const allUser = await userService.ListAllUser()
+            return allUser
+        }, 
         getUserByEmailAndPassword: async (_, { email, password }) => {
+         try {
+            const currentUser = await userService.getCurrentUser(email, password)
+            return currentUser
+            
+         } catch (error) {
+            console.error(`user can not be created at the moment`);
+            throw error;
+         }
+        }  
+    },
+
+    Mutation: {
+        createNewUser : async (_, args) => {
             try {
-              const user = await User.findOne({ email });
-      
-              if (!user) {
-                throw new Error('User not found');
-              }
-      
-              const isPasswordValid = await user.comparePassword(password); 
-      
-              if (!isPasswordValid) {
-                throw new Error('Invalid password');
-              }
-      
-              return user;
+                const newUser = await userService.createUser(args)
+                return newUser
             } catch (error) {
-              throw new Error('Failed to fetch user');
+                console.error(`user can not be created at the moment`);
+                throw error;
             }
-          }
+        } 
     }
 }
 
