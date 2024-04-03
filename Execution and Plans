@@ -1,0 +1,10 @@
+I have completed all my schema and intergrated all with perfect working state
+I also completed Database intergration
+i have completely intergrated .env into my app for keys/api keys security   
+
+
+
+I should ensure my login works perfectly 
+i will work more on authentication and authorization
+ensure authentication and security
+make a decision either to serve image from apollo-server or from other server

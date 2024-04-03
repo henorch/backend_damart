@@ -54,9 +54,11 @@ userSchema.pre('save', async function(next){
 })
 
 //This compare the login password before fetching from database
-userSchema.methods.verifyPassword = async function(candidatePassword){
+userSchema.methods.comparePassword = async function(candidatePassword){
     try {
-        
+        const user = this;
+        const compare = await bcrypt.compare(password, user.password)
+        return compare
     } catch (error) {
         console.error(`This is a problem retrieving user with this password`);
         throw error;

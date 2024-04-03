@@ -11,6 +11,7 @@ export  const userService = {
         throw error
       }
     }, 
+
     getCurrentUser: async (email, password) => {
         try {
             const user = await User.findOne({ email });
@@ -19,12 +20,13 @@ export  const userService = {
               throw new Error('User not found');
             }
     
-            const isPasswordValid = await user.comparePassword(password); 
+            const isPasswordValid = await user.comparePassword({password}); 
     
             if (!isPasswordValid) {
               throw new Error('Invalid password');
+              console.log('password not match');
             }
-    
+            console.log('password match');
             return user;
           } catch (error) {
             throw new Error('Failed to fetch user');

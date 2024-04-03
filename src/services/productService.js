@@ -5,7 +5,7 @@ export const productService = {
 
     getAllProduct: async () => {
         try {
-            const products = await Products.find({})
+            const products = await Product.find({})
             return products
         } catch (error) {
             console.log(error);
@@ -14,7 +14,7 @@ export const productService = {
     },
     searchProuctbyString: async (contain) => {
         try {
-            const searchProducts = await Products.find({contain})
+            const searchProducts = await Product.find({contain})
             return searchProducts
         } catch (error) {
             console.error(`product you are search for is currently unavailable`);
@@ -22,8 +22,10 @@ export const productService = {
         }
     },
     searchProductbyPrice: async (price) => {
+        const query = {}
         try {
-            const priceSearch = await Products.find(price == Products.price === price)
+            if(price != undefined ) query.price = { ...query.price, $lte : price } 
+            const priceSearch = await Product.find(query)
             return priceSearch
         } catch (error) {
             console.error(`There is no product in that price range `);

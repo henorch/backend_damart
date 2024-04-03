@@ -5,17 +5,7 @@ const Userresolver = {
         getAllUser: async () =>  {
             const allUser = await userService.ListAllUser()
             return allUser
-        }, 
-        getUserByEmailAndPassword: async (_, { email, password }) => {
-         try {
-            const currentUser = await userService.getCurrentUser(email, password)
-            return currentUser
-            
-         } catch (error) {
-            console.error(`user can not be created at the moment`);
-            throw error;
-         }
-        }  
+        }
     },
 
     Mutation: {
@@ -27,7 +17,18 @@ const Userresolver = {
                 console.error(`user can not be created at the moment`);
                 throw error;
             }
-        } 
+        },
+        
+        loginUser: async (_, { email, password }) => {
+            try {
+               const currentUser = await userService.getCurrentUser(email, password)
+               return currentUser
+               
+            } catch (error) {
+               console.error(`user can not be created at the moment`);
+               throw error;
+            }
+           }  
     }
 }
 
